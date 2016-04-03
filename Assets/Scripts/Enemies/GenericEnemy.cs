@@ -8,7 +8,7 @@ public class GenericEnemy : MonoBehaviour
 
 	void Start ()
     {
-	    
+
 	}
 	
 	void Update ()

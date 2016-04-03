@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public float rotateSpeed = 8.0f;
     public float walkSpeed = 5.0f;
     public float runSpeed = 10.0f;
+    public float dodgeDistance = 5.0f;
 
     private Rigidbody playerRgb;
 
@@ -37,11 +38,15 @@ public class PlayerController : MonoBehaviour
             for (int i = 0; i < inRange.Count; i++)
             {
                 inRange[i].health -= 10;
-                Debug.Log(inRange[i] + " health: " + inRange[i].health);
             }
         }
 
-        switch(weapon)
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            transform.position += transform.forward * dodgeDistance;
+        }
+
+        switch (weapon)
         {
             case Weapon.Front:
                 frontWeapon.enabled = true;
@@ -92,7 +97,6 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.GetComponent<GenericEnemy>() != null)
         {
             inRange.Add(other.gameObject.GetComponent<GenericEnemy>());
-            Debug.Log("Added: " + other.gameObject.name);
         }
     }
 
@@ -101,7 +105,6 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.GetComponent<GenericEnemy>() != null)
         {
             inRange.Remove(other.gameObject.GetComponent<GenericEnemy>());
-            Debug.Log("Removed: " + other.gameObject.name);
         }
     }
 }
