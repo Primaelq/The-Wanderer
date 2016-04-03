@@ -42,6 +42,13 @@ public class PlayerController : MonoBehaviour
 
         Vector3 movement = new Vector3(horizontalInput, 0.0f, verticalInput);
 
-        playerRgb.velocity = movement * walkSpeed;
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            playerRgb.velocity = movement * runSpeed;
+        }
+        else
+        {
+            playerRgb.velocity = movement * walkSpeed;
+        }
     }
 }
