@@ -1,8 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour
 {
+
+    public enum Weapon
+    {
+        Front,
+        Around
+    };
 
     public float rotateSpeed = 8.0f;
     public float walkSpeed = 5.0f;
@@ -10,14 +17,42 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody playerRgb;
 
+    private List<GenericEnemy> inRange;
+
+    public Collider frontWeapon;
+    public Collider aroundWeapon;
+
+    public Weapon weapon;
+
 	void Start ()
     {
         playerRgb = GetComponent<Rigidbody>();
+        inRange = new List<GenericEnemy>();
 	}
 	
 	void Update ()
     {
-	    
+	    if (Input.GetMouseButtonDown(0))
+        {
+            for (int i = 0; i < inRange.Count; i++)
+            {
+                inRange[i].health -= 10;
+                Debug.Log(inRange[i] + " health: " + inRange[i].health);
+            }
+        }
+
+        switch(weapon)
+        {
+            case Weapon.Front:
+                frontWeapon.enabled = true;
+                aroundWeapon.enabled = false;
+                break;
+
+            case Weapon.Around:
+                aroundWeapon.enabled = true;
+                frontWeapon.enabled = false;
+                break;
+        }
 	}
 
     void FixedUpdate()
@@ -49,6 +84,24 @@ public class PlayerController : MonoBehaviour
         else
         {
             playerRgb.velocity = movement * walkSpeed;
+        }
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.GetComponent<GenericEnemy>() != null)
+        {
+            inRange.Add(other.gameObject.GetComponent<GenericEnemy>());
+            Debug.Log("Added: " + other.gameObject.name);
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.GetComponent<GenericEnemy>() != null)
+        {
+            inRange.Remove(other.gameObject.GetComponent<GenericEnemy>());
+            Debug.Log("Removed: " + other.gameObject.name);
         }
     }
 }
