@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     public float walkSpeed = 5.0f;
     public float runSpeed = 10.0f;
 
-    private Rigidbody playerRgb; 
+    private Rigidbody playerRgb;
 
 	void Start ()
     {
