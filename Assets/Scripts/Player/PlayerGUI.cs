@@ -10,15 +10,22 @@ public class PlayerGUI : MonoBehaviour
     public int currentHealth;
 
     public Slider healthSlider;
+    public Slider spellLoading;
 
     public List<GameObject> spells;
     public int selected = 0;
+
+    public float loadTime = 5.0f;
+
+    private float startTime;
 
     void Start ()
     {
         currentHealth = startHealth;
         healthSlider.maxValue = startHealth;
         healthSlider.value = startHealth;
+
+        spellLoading.value = 0;
 
         disableExcept(selected, spells);
     }
@@ -36,6 +43,21 @@ public class PlayerGUI : MonoBehaviour
         {
             selected--;
             disableExcept(selected, spells);
+        }
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            startTime = Time.time;
+        }
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            spellLoading.value = (Time.time - startTime) / loadTime * 100;
+        }
+
+        if (Input.GetKeyUp(KeyCode.Space) || spellLoading.value >= 100)
+        {
+            spellLoading.value = 0;
         }
     }
 
