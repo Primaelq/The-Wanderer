@@ -10,9 +10,9 @@ public class PlayerGUI : MonoBehaviour
     public int currentHealth;
 
     public Slider healthSlider;
-    public Slider spellLoading;
 
-    public List<GameObject> spells;
+    public GameObject spellBar;
+    public List<Transform> spells;
     public int selected = 0;
 
     public float loadTime = 5.0f;
@@ -28,7 +28,12 @@ public class PlayerGUI : MonoBehaviour
         healthSlider.maxValue = startHealth;
         healthSlider.value = startHealth;
 
-        spellLoading.value = 0;
+        spells = new List<Transform>();
+
+        for(int i = 0; i < spellBar.transform.childCount; i++)
+        {
+            spells.Add(spellBar.transform.GetChild(i));
+        }
 
         disableExcept(selected, spells);
     }
@@ -50,22 +55,13 @@ public class PlayerGUI : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            startTime = Time.time;
-        }
-
-        if (Input.GetKey(KeyCode.Space))
-        {
-            spellLoading.value = (Time.time - startTime) / loadTime * 100;
-        }
-
-        if (Input.GetKeyUp(KeyCode.Space) || spellLoading.value >= 100)
-        {
-            spellLoading.value = 0;
+            spells[selected].GetComponent<SpellTemplate>().startLoadTime = Time.time;
+            spells[selected].GetChild(0).GetComponent<Slider>().value = 0.0f;
         }
     }
 
 
-    public void disableExcept(int index, List<GameObject> list)
+    public void disableExcept(int index, List<Transform> list)
     {
         for (int i = 0; i < list.Count; i++)
         {
