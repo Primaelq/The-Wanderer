@@ -21,9 +21,12 @@ public class PlayerAttacks : MonoBehaviour
 
     public int damages = 10;
 
+    private Transform arms;
+
     void Start ()
     {
         inRange = new List<GenericEnemy>();
+        arms = transform.GetChild(0);
     }
 	
 	void Update ()
@@ -34,6 +37,7 @@ public class PlayerAttacks : MonoBehaviour
             {
                 inRange[i].health -= damages;
             }
+            
         }
 
         switch (weapon)
