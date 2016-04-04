@@ -17,6 +17,9 @@ public class PlayerGUI : MonoBehaviour
 
     public float loadTime = 5.0f;
 
+    public Color highlight;
+    public Color dark;
+
     private float startTime;
 
     void Start ()
@@ -68,11 +71,11 @@ public class PlayerGUI : MonoBehaviour
         {
             if (i != index)
             {
-                list[i].SetActive(false);
+                list[i].GetComponent<Image>().color = dark;
             }
             else
             {
-                list[i].SetActive(true);
+                list[i].GetComponent<Image>().color = highlight;
             }
         }
     }

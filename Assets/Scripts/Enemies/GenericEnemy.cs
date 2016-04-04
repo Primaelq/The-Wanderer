@@ -6,6 +6,7 @@ public class GenericEnemy : MonoBehaviour
     public int health = 100;
     public GameObject indicator;
 
+    [HideInInspector]
     public bool inRange = false;
 
 	void Start ()
