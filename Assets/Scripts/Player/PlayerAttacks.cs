@@ -17,6 +17,8 @@ public class PlayerAttacks : MonoBehaviour
 
     private List<GenericEnemy> inRange;
 
+    private GameObject test;
+
     public int damages = 10;
 
     void Start ()

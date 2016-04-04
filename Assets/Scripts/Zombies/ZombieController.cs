@@ -3,12 +3,11 @@ using System.Collections;
 
 public class ZombieController : MonoBehaviour
 {
-
     public Transform target;
     NavMeshAgent agent;
 
     public float hitDistance = 1.0f;
-    public int damages = 10;
+    public int damages = 5;
 
 	void Start ()
     {
