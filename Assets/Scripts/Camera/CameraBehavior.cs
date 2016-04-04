@@ -9,9 +9,6 @@ public class CameraBehavior : MonoBehaviour
 	[Range(0.0f, 1f)]
 	public float cameraPosInRay = 0.30f; //the percantage of position of the camera from the ray 
 
-	public Transform debugObj1;
-	public Transform debugPlusCameraPos;
-
 	public float cameraLerpTime = 0.1f;
 
 	private Vector3 startPosition; //we want the camera to relatively be at the same position from the player
@@ -41,10 +38,8 @@ public class CameraBehavior : MonoBehaviour
 			{
 				targetPoint = (targetPoint - follow.position).normalized * maxCamDisFromPlayer;
 			}
-			debugObj1.position = targetPoint;
-			Debug.DrawRay(follow.position, debugObj1.position);
-			debugPlusCameraPos.position = (debugObj1.position-follow.position) * cameraPosInRay + follow.position;
-			lastChangePosition = debugPlusCameraPos.position;
+			Debug.DrawRay(follow.position, targetPoint);
+			lastChangePosition = (targetPoint-follow.position) * cameraPosInRay + follow.position;
 		}
 	}
 
