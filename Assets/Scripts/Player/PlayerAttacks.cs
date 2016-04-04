@@ -55,6 +55,7 @@ public class PlayerAttacks : MonoBehaviour
         if (other.gameObject.GetComponent<GenericEnemy>() != null)
         {
             inRange.Add(other.gameObject.GetComponent<GenericEnemy>());
+            other.gameObject.GetComponent<GenericEnemy>().inRange = true;
         }
     }
 
@@ -63,6 +64,7 @@ public class PlayerAttacks : MonoBehaviour
         if (other.gameObject.GetComponent<GenericEnemy>() != null)
         {
             inRange.Remove(other.gameObject.GetComponent<GenericEnemy>());
+            other.gameObject.GetComponent<GenericEnemy>().inRange = false;
         }
     }
 }
