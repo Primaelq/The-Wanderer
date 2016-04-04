@@ -5,6 +5,7 @@ public class GenericEnemy : MonoBehaviour
 {
     public int health = 100;
     public GameObject indicator;
+    public GameObject healthBar;
 
     [HideInInspector]
     public bool inRange = false;
@@ -29,5 +30,9 @@ public class GenericEnemy : MonoBehaviour
         {
             indicator.SetActive(false);
         }
-	}
+
+        healthBar.transform.localScale = new Vector3( (float) health / 100, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
+
+        healthBar.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
+    }
 }
