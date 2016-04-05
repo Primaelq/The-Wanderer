@@ -6,7 +6,6 @@ public class PlayerController : MonoBehaviour
 
     public float rotateSpeed = 8.0f;
     public float walkSpeed = 5.0f;
-    public float runSpeed = 10.0f;
     public float dodgeDistance = 5.0f;
 
     [HideInInspector]
@@ -48,14 +47,7 @@ public class PlayerController : MonoBehaviour
         float verticalInput = Input.GetAxis("Vertical");
 
         Vector3 movement = new Vector3(horizontalInput, 0.0f, verticalInput);
-
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            playerRgb.velocity = movement * runSpeed;
-        }
-        else
-        {
-            playerRgb.velocity = movement * walkSpeed;
-        }
+        
+        playerRgb.velocity = movement * walkSpeed;
     }
 }
