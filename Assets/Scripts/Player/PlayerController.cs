@@ -3,10 +3,9 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
-
     public float rotateSpeed = 8.0f;
     public float walkSpeed = 5.0f;
-    public float dodgeDistance = 5.0f;
+    public float dodgeDistance = 10.0f;
 
     [HideInInspector]
     public Vector3 targetPoint;
@@ -27,7 +26,18 @@ public class PlayerController : MonoBehaviour
         {
             transform.position += transform.forward * dodgeDistance;
         }*/
-	}
+
+        if(Input.GetKeyDown(KeyCode.LeftShift) && transform.GetComponent<PlayerGUI>().staminaReady)
+        {
+            loadingStamina = true;
+        }
+
+        if(Input.GetKeyUp(KeyCode.LeftShift) && transform.GetComponent<PlayerGUI>().staminaReady)
+        {
+            transform.position += transform.forward * (dodgeDistance * (transform.GetComponent<PlayerGUI>().startStamina - transform.GetComponent<PlayerGUI>().currentStamina));
+            loadingStamina = false;
+        }
+    }
 
     void FixedUpdate()
     {
@@ -52,16 +62,5 @@ public class PlayerController : MonoBehaviour
         Vector3 movement = new Vector3(horizontalInput, 0.0f, verticalInput);
         
         playerRgb.velocity = movement * walkSpeed;
-
-        if(Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            transform.GetComponent<PlayerGUI>().staminaTime = Time.time;
-            loadingStamina = true;
-        }
-
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            loadingStamina = false;
-        }
     }
 }
