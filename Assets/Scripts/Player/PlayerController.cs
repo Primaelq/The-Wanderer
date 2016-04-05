@@ -13,17 +13,20 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody playerRgb;
 
-	void Start ()
+    [HideInInspector]
+    public bool loadingStamina = false;
+
+    void Start ()
     {
         playerRgb = GetComponent<Rigidbody>();
 	}
 	
 	void Update ()
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        /*if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             transform.position += transform.forward * dodgeDistance;
-        }
+        }*/
 	}
 
     void FixedUpdate()
@@ -49,5 +52,16 @@ public class PlayerController : MonoBehaviour
         Vector3 movement = new Vector3(horizontalInput, 0.0f, verticalInput);
         
         playerRgb.velocity = movement * walkSpeed;
+
+        if(Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            transform.GetComponent<PlayerGUI>().staminaTime = Time.time;
+            loadingStamina = true;
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            loadingStamina = false;
+        }
     }
 }
