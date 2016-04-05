@@ -29,7 +29,7 @@ public class FireCircle : MonoBehaviour
         }
         else
         {
-            transform.position = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().targetPoint;
+            transform.position = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHelper>().targetPoint;
         }
 	}
 

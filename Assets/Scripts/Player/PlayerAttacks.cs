@@ -4,27 +4,26 @@ using System.Collections.Generic;
 
 public class PlayerAttacks : MonoBehaviour
 {
-    public enum Weapon
+    private PlayerHelper helper;
+
+    private enum Weapon
     {
         Front,
         Around
     };
     
-    public Weapon weapon;
-
-    public Collider frontWeapon;
-    public Collider aroundWeapon;
+    private Weapon weapon;
 
     private List<GenericEnemy> inRange;
 
     private GameObject test;
 
-    public int damages = 10;
-
     private Transform arms;
 
     void Start ()
     {
+        helper = GetComponent<PlayerHelper>();
+
         inRange = new List<GenericEnemy>();
         arms = transform.GetChild(0);
     }
@@ -35,21 +34,20 @@ public class PlayerAttacks : MonoBehaviour
         {
             for (int i = 0; i < inRange.Count; i++)
             {
-                inRange[i].health -= damages;
+                inRange[i].health -= helper.damages;
             }
-            
         }
 
         switch (weapon)
         {
             case Weapon.Front:
-                frontWeapon.enabled = true;
-                aroundWeapon.enabled = false;
+                helper.frontWeapon.enabled = true;
+                helper.aroundWeapon.enabled = false;
                 break;
 
             case Weapon.Around:
-                aroundWeapon.enabled = true;
-                frontWeapon.enabled = false;
+                helper.aroundWeapon.enabled = true;
+                helper.frontWeapon.enabled = false;
                 break;
         }
     }

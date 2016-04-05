@@ -27,7 +27,7 @@ public class ZombieController : MonoBehaviour
 
         if (agent.remainingDistance <= hitDistance && attackReady)
         {
-            target.GetComponent<PlayerGUI>().currentHealth -= damages;
+            target.GetComponent<PlayerHelper>().currentHealth -= damages;
             attackReady = false;
             StartCoroutine(AttackDelay());
         }

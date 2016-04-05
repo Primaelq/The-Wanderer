@@ -24,7 +24,7 @@ public class EnemyProjectile : MonoBehaviour
 	{
 		if(other.tag == "Player")
 		{
-			other.transform.GetComponent<PlayerGUI>().currentHealth -= damage;
+			other.transform.GetComponent<PlayerHelper>().currentHealth -= damage;
 		}
 		Destroy(gameObject);
 	}

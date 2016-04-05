@@ -41,7 +41,7 @@ public class SpellTemplate : MonoBehaviour
 
         if(loaded)
         {
-            Instantiate(prefab, GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().targetPoint, Quaternion.identity);
+            Instantiate(prefab, GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHelper>().targetPoint, Quaternion.identity);
             loaded = false;
         }
     }
