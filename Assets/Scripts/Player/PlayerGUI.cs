@@ -44,7 +44,7 @@ public class PlayerGUI : MonoBehaviour
             spells.Add(spellBar.transform.GetChild(i));
         }
 
-        disableExcept(selected, spells);
+        DisableExcept(selected, spells);
     }
 	
 	void Update ()
@@ -55,12 +55,12 @@ public class PlayerGUI : MonoBehaviour
         if (Input.GetAxis("Mouse ScrollWheel") > 0 && selected < spells.Count - 1)
         {
             selected++;
-            disableExcept(selected, spells);
+			DisableExcept(selected, spells);
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selected > 0)
         {
             selected--;
-            disableExcept(selected, spells);
+			DisableExcept(selected, spells);
         }
 
         if(Input.GetKeyDown(KeyCode.Space) && spells[selected].GetComponent<SpellTemplate>().ready)
@@ -85,7 +85,7 @@ public class PlayerGUI : MonoBehaviour
         }
     }
 
-    public void disableExcept(int index, List<Transform> list)
+    private void DisableExcept(int index, List<Transform> list)
     {
         for (int i = 0; i < list.Count; i++)
         {
@@ -99,4 +99,6 @@ public class PlayerGUI : MonoBehaviour
             }
         }
     }
+
+
 }

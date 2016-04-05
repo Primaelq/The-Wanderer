@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
     public float rotateSpeed = 8.0f;
     public float walkSpeed = 5.0f;
     public float dodgeDistance = 10.0f;
+	public float dodgeSpeed = 10.0f;
 
     [HideInInspector]
     public Vector3 targetPoint;
@@ -34,7 +35,8 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKeyUp(KeyCode.LeftShift) && transform.GetComponent<PlayerGUI>().staminaReady)
         {
-            transform.position += transform.forward * (dodgeDistance * (transform.GetComponent<PlayerGUI>().startStamina - transform.GetComponent<PlayerGUI>().currentStamina));
+            //transform.position += transform.forward * (dodgeDistance * (transform.GetComponent<PlayerGUI>().startStamina - transform.GetComponent<PlayerGUI>().currentStamina));
+
             loadingStamina = false;
         }
     }
@@ -61,6 +63,14 @@ public class PlayerController : MonoBehaviour
 
         Vector3 movement = new Vector3(horizontalInput, 0.0f, verticalInput);
         
-        playerRgb.velocity = movement * walkSpeed;
+		if(loadingStamina && transform.GetComponent<PlayerGUI>().currentStamina > 	0)
+		{
+       		playerRgb.velocity = movement * dodgeSpeed;
+		}
+		else
+		{
+			playerRgb.velocity = movement * walkSpeed;
+		}
+
     }
 }
