@@ -6,11 +6,13 @@ public class SpellTemplate : MonoBehaviour
 {
     public float chargingTime = 2.0f;
     public int damages = 10;
+    public GameObject prefab;
 
     public Color loadedColor;
 
     [HideInInspector]
     public float startLoadTime;
+    public bool loaded = false;
 
     private float currentTime;
     
@@ -33,6 +35,12 @@ public class SpellTemplate : MonoBehaviour
             transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>().color = Color.white;
 
             transform.GetChild(0).GetComponent<Slider>().value = currentTime / chargingTime;
+        }
+
+        if (loaded)
+        {
+            Instantiate(prefab, GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().targetPoint, Quaternion.identity);
+            loaded = false;
         }
     }
 }

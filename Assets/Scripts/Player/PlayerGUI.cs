@@ -55,6 +55,7 @@ public class PlayerGUI : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Space))
         {
+            spells[selected].GetComponent<SpellTemplate>().loaded = true;
             spells[selected].GetComponent<SpellTemplate>().startLoadTime = Time.time;
             spells[selected].GetChild(0).GetComponent<Slider>().value = 0.0f;
         }

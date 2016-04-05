@@ -9,6 +9,9 @@ public class PlayerController : MonoBehaviour
     public float runSpeed = 10.0f;
     public float dodgeDistance = 5.0f;
 
+    [HideInInspector]
+    public Vector3 targetPoint;
+
     private Rigidbody playerRgb;
 
 	void Start ()
@@ -34,7 +37,7 @@ public class PlayerController : MonoBehaviour
 
         if (floor.Raycast(ray, out hitdist))
         {
-            Vector3 targetPoint = ray.GetPoint(hitdist);
+            targetPoint = ray.GetPoint(hitdist);
             
             Quaternion targetRotation = Quaternion.LookRotation(targetPoint - transform.position);
             

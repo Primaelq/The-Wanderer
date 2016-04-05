@@ -44,9 +44,5 @@ public class CameraBehavior : MonoBehaviour
 
         transform.position = Vector3.Lerp(transform.position, (lastChangePosition + startPosition), cameraLerpTime);
     }
-
-	void LateUpdate()
-	{
-	}
 		
 }
