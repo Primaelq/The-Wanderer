@@ -41,11 +41,12 @@ public class CameraBehavior : MonoBehaviour
 			Debug.DrawRay(follow.position, targetPoint);
 			lastChangePosition = (targetPoint-follow.position) * cameraPosInRay + follow.position;
 		}
-	}
+
+        transform.position = Vector3.Lerp(transform.position, (lastChangePosition + startPosition), cameraLerpTime);
+    }
 
 	void LateUpdate()
 	{
-		transform.position = Vector3.Lerp(transform.position,(lastChangePosition + startPosition), cameraLerpTime);
 	}
 		
 }
