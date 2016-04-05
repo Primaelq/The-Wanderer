@@ -6,10 +6,17 @@ using System.Collections.Generic;
 public class PlayerGUI : MonoBehaviour
 {
     public int startHealth = 100;
+    [Range(0.0f, 1.0f)]
+    public float startStamina = 0.5f; // This should de set in seconds
     [HideInInspector]
     public int currentHealth;
+    [HideInInspector]
+    public float currentStamina;
+    [HideInInspector]
+    public float staminaTime = 0.0f;
 
     public Slider healthSlider;
+    public Slider staminaSlider;
 
     public GameObject spellBar;
     public List<Transform> spells;
@@ -28,6 +35,10 @@ public class PlayerGUI : MonoBehaviour
         healthSlider.maxValue = startHealth;
         healthSlider.value = startHealth;
 
+        currentStamina = startStamina;
+        staminaSlider.maxValue = startStamina;
+        staminaSlider.value = startStamina;
+
         spells = new List<Transform>();
 
         for(int i = 0; i < spellBar.transform.childCount; i++)
@@ -41,6 +52,7 @@ public class PlayerGUI : MonoBehaviour
 	void Update ()
     {
         healthSlider.value = currentHealth;
+        staminaSlider.value = currentStamina;
 
         if (Input.GetAxis("Mouse ScrollWheel") > 0 && selected < spells.Count - 1)
         {
@@ -59,8 +71,21 @@ public class PlayerGUI : MonoBehaviour
             spells[selected].GetComponent<SpellTemplate>().startLoadTime = Time.time;
             spells[selected].GetChild(0).GetComponent<Slider>().value = 0.0f;
         }
-    }
 
+        if(!transform.GetComponent<PlayerController>().loadingStamina && currentStamina < startStamina)
+        {
+            currentStamina += Time.time;
+        }
+
+        if(transform.GetComponent<PlayerController>().loadingStamina)
+        {
+            currentStamina -= Mathf.Clamp(Time.time - staminaTime, 0.0f, startStamina); 
+        }
+        else if(currentStamina < startStamina)
+        {
+            currentStamina += Time.time;
+        }
+    }
 
     public void disableExcept(int index, List<Transform> list)
     {
