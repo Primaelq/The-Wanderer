@@ -13,7 +13,7 @@ public class PlayerGUI : MonoBehaviour
     [HideInInspector]
     public float currentStamina;
     [HideInInspector]
-    public float staminaTime = 0.0f;
+    public bool staminaReady = false;
 
     public Slider healthSlider;
     public Slider staminaSlider;
@@ -21,8 +21,6 @@ public class PlayerGUI : MonoBehaviour
     public GameObject spellBar;
     public List<Transform> spells;
     public int selected = 0;
-
-    public float loadTime = 5.0f;
 
     public Color highlight;
     public Color dark;
@@ -72,18 +70,18 @@ public class PlayerGUI : MonoBehaviour
             spells[selected].GetChild(0).GetComponent<Slider>().value = 0.0f;
         }
 
-        if(!transform.GetComponent<PlayerController>().loadingStamina && currentStamina < startStamina)
-        {
-            currentStamina += Time.time;
-        }
-
         if(transform.GetComponent<PlayerController>().loadingStamina)
         {
-            currentStamina -= Mathf.Clamp(Time.time - staminaTime, 0.0f, startStamina); 
+            currentStamina -= Time.deltaTime;
         }
         else if(currentStamina < startStamina)
         {
-            currentStamina += Time.time;
+            currentStamina += Time.deltaTime;
+            staminaReady = false;
+        }
+        else
+        {
+            staminaReady = true;
         }
     }
 
