@@ -13,6 +13,7 @@ public class SpellTemplate : MonoBehaviour
     [HideInInspector]
     public float startLoadTime;
     public bool loaded = false;
+    public bool ready = true;
 
     private float currentTime;
     
@@ -28,16 +29,17 @@ public class SpellTemplate : MonoBehaviour
 
         if (currentTime >= chargingTime)
         {
+            ready = true;
             transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>().color = loadedColor;
         }
         else
         {
+            ready = false;
             transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>().color = Color.white;
-
             transform.GetChild(0).GetComponent<Slider>().value = currentTime / chargingTime;
         }
 
-        if (loaded)
+        if(loaded)
         {
             Instantiate(prefab, GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().targetPoint, Quaternion.identity);
             loaded = false;

@@ -53,7 +53,7 @@ public class PlayerGUI : MonoBehaviour
             disableExcept(selected, spells);
         }
 
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space) && spells[selected].GetComponent<SpellTemplate>().ready)
         {
             spells[selected].GetComponent<SpellTemplate>().loaded = true;
             spells[selected].GetComponent<SpellTemplate>().startLoadTime = Time.time;
