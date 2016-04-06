@@ -5,25 +5,41 @@ using System.Collections;
 public class SpellTemplate : MonoBehaviour
 {
     public float chargingTime = 2.0f;
-    public int damages = 10;
-    public GameObject prefab;
-
-    public Color loadedColor;
+    public GameObject particleEffect;
 
     [HideInInspector]
+    public Sprite icon;
+    [HideInInspector]
     public float startLoadTime;
+    [HideInInspector]
     public bool loaded = false;
+    [HideInInspector]
     public bool ready = true;
 
     private float currentTime;
-    
-	void Start ()
+
+    private Color loadedColor;
+
+    void Start ()
     {
         currentTime = chargingTime;
         startLoadTime = -chargingTime;
+
+        loadedColor = Color.green;
     }
 	
 	void Update ()
+    {
+        Recharge();
+
+        if(loaded)
+        {
+            Instantiate(particleEffect, GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHelper>().targetPoint, Quaternion.identity);
+            loaded = false;
+        }
+    }
+
+    void Recharge()
     {
         currentTime = Time.time - startLoadTime;
 
@@ -37,12 +53,6 @@ public class SpellTemplate : MonoBehaviour
             ready = false;
             transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>().color = Color.white;
             transform.GetChild(0).GetComponent<Slider>().value = currentTime / chargingTime;
-        }
-
-        if(loaded)
-        {
-            Instantiate(prefab, GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHelper>().targetPoint, Quaternion.identity);
-            loaded = false;
         }
     }
 }
