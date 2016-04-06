@@ -4,19 +4,19 @@ using System.Collections;
 
 public class SpellTemplate : MonoBehaviour
 {
-    [HideInInspector]
+    //[HideInInspector]
     public string spellName, description;
-    [HideInInspector]
+    //[HideInInspector]
     public int type, damages, health;
-    [HideInInspector]
+    //[HideInInspector]
     public float rechargeTime, radius, castTime;
-    [HideInInspector]
+    //[HideInInspector]
     public bool zone, divideDamages;
-    [HideInInspector]
+    //[HideInInspector]
     public GameObject particleEffect, prefab;
-    [HideInInspector]
+    //[HideInInspector]
     public Sprite icon;
-    [HideInInspector]
+    //[HideInInspector]
     public Animation loading, launching;
     [HideInInspector]
     public float startLoadTime;
