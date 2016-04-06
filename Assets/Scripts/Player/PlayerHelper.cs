@@ -55,6 +55,8 @@ public class PlayerHelper : MonoBehaviour
         currentStamina = startStamina;
         staminaSlider.maxValue = startStamina;
         staminaSlider.value = startStamina;
+
+        GetComponent<PlayerGUI>().DisableExcept(0, spells);
     }
 
     void Update()

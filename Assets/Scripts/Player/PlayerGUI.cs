@@ -14,8 +14,6 @@ public class PlayerGUI : MonoBehaviour
     void Start ()
     {
         helper = GetComponent<PlayerHelper>();
-
-        DisableExcept(selected, helper.spells);
     }
 	
 	void Update ()
@@ -54,7 +52,7 @@ public class PlayerGUI : MonoBehaviour
         }
     }
 
-    private void DisableExcept(int index, List<Transform> list)
+    public void DisableExcept(int index, List<Transform> list)
     {
         for (int i = 0; i < list.Count; i++)
         {
