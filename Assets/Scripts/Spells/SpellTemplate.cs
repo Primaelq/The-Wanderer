@@ -4,11 +4,20 @@ using System.Collections;
 
 public class SpellTemplate : MonoBehaviour
 {
-    public float chargingTime = 2.0f;
-    public GameObject particleEffect;
-
+    [HideInInspector]
+    public string spellName, description;
+    [HideInInspector]
+    public int type, damages, health;
+    [HideInInspector]
+    public float rechargeTime, radius, castTime;
+    [HideInInspector]
+    public bool zone, divideDamages;
+    [HideInInspector]
+    public GameObject particleEffect, prefab;
     [HideInInspector]
     public Sprite icon;
+    [HideInInspector]
+    public Animation loading, launching;
     [HideInInspector]
     public float startLoadTime;
     [HideInInspector]
@@ -22,8 +31,8 @@ public class SpellTemplate : MonoBehaviour
 
     void Start ()
     {
-        currentTime = chargingTime;
-        startLoadTime = -chargingTime;
+        currentTime = rechargeTime;
+        startLoadTime = -rechargeTime;
 
         loadedColor = Color.green;
     }
@@ -43,7 +52,7 @@ public class SpellTemplate : MonoBehaviour
     {
         currentTime = Time.time - startLoadTime;
 
-        if (currentTime >= chargingTime)
+        if (currentTime >= rechargeTime)
         {
             ready = true;
             transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>().color = loadedColor;
@@ -52,7 +61,7 @@ public class SpellTemplate : MonoBehaviour
         {
             ready = false;
             transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>().color = Color.white;
-            transform.GetChild(0).GetComponent<Slider>().value = currentTime / chargingTime;
+            transform.GetChild(0).GetComponent<Slider>().value = currentTime / rechargeTime;
         }
     }
 }

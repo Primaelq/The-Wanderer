@@ -35,10 +35,8 @@ public class SpellsCreator : EditorWindow
         EditorGUILayout.Separator();
         icon = (Sprite)EditorGUILayout.ObjectField("Icon", icon, typeof(Sprite), false);
         EditorGUILayout.Separator();
-
-        //GUILayout.BeginHorizontal();
+        
         type = EditorGUILayout.Popup("Type", type, types);
-        //GUILayout.EndHorizontal();
 
         EditorGUI.indentLevel++;
         switch (type)
@@ -86,7 +84,37 @@ public class SpellsCreator : EditorWindow
         GUILayout.Space(50);
         if (GUILayout.Button("Create"))
         {
+            GameObject tempSpell = new GameObject();
+            tempSpell.AddComponent<SpellTemplate>();
+            tempSpell.GetComponent<SpellTemplate>().spellName = spellName;
+            tempSpell.GetComponent<SpellTemplate>().description = description;
+            tempSpell.GetComponent<SpellTemplate>().icon = icon;
+            tempSpell.GetComponent<SpellTemplate>().type = type;
+            switch(type)
+            {
+                case 0:
+                    tempSpell.GetComponent<SpellTemplate>().damages = damages;
+                    break;
+                case 1:
+                    tempSpell.GetComponent<SpellTemplate>().health = health;
+                    break;
+                case 2:
+                    tempSpell.GetComponent<SpellTemplate>().prefab = prefab;
+                    break;
+            }
+            tempSpell.GetComponent<SpellTemplate>().zone = zone;
+            if(zone)
+            {
+                tempSpell.GetComponent<SpellTemplate>().radius = radius;
+                tempSpell.GetComponent<SpellTemplate>().divideDamages = divideDamages;
+            }
+            tempSpell.GetComponent<SpellTemplate>().castTime = castTime;
+            tempSpell.GetComponent<SpellTemplate>().rechargeTime = rechargeTime;
+            tempSpell.GetComponent<SpellTemplate>().particleEffect = particleEffect;
+            tempSpell.GetComponent<SpellTemplate>().loading = playerAnimLoading;
+            tempSpell.GetComponent<SpellTemplate>().launching = playerAnimLauching;
 
+            GameObject newSpell = PrefabUtility.CreatePrefab("Assets/Prefabs/Spells/" + spellName + ".prefab", tempSpell);
         }
     }
 }
