@@ -4,7 +4,7 @@ using System.Collections;
 
 public class SpellTemplate : MonoBehaviour
 {
-    [HideInInspector]
+    //[HideInInspector]
     public string spellName, description;
     [HideInInspector]
     public int type, damages, health;
