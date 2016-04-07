@@ -115,7 +115,6 @@ public class SpellsCreator : EditorWindow
             tempSpell.GetComponent<SpellTemplate>().launching = playerAnimLauching;
 
             GameObject newSpell = PrefabUtility.CreatePrefab("Assets/Prefabs/Spells/" + spellName + ".prefab", tempSpell);
-            DestroyImmediate(tempSpell);
         }
     }
 }
