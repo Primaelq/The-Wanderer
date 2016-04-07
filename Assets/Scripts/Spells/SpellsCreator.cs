@@ -12,7 +12,7 @@ public class SpellsCreator : EditorWindow
 
     int damages, health, type;
 
-    bool zone, stopPlayerWhenCasting, divideDamages, divideHealth;
+    bool zone, stopPlayerWhenCasting, divideDamages, divideHealth, useMousePosition;
 
     float radius, castTime, rechargeTime;
 
@@ -72,6 +72,8 @@ public class SpellsCreator : EditorWindow
             }
             EditorGUI.indentLevel--;
         }
+        EditorGUILayout.Separator();
+        useMousePosition = EditorGUILayout.Toggle("Use mouse position", useMousePosition);
         EditorGUILayout.Separator();
         castTime = EditorGUILayout.FloatField("Cast Time", castTime);
         rechargeTime = EditorGUILayout.FloatField("Recharge Time", rechargeTime);
@@ -198,7 +200,8 @@ public class SpellsCreator : EditorWindow
 				tempSpell.GetComponent<SpellTemplate>().radius = radius;
 				tempSpell.GetComponent<SpellTemplate>().divideDamages = divideDamages;
 			}
-			tempSpell.GetComponent<SpellTemplate>().castTime = castTime;
+            tempSpell.GetComponent<SpellTemplate>().useMousePosition = useMousePosition;
+            tempSpell.GetComponent<SpellTemplate>().castTime = castTime;
 			tempSpell.GetComponent<SpellTemplate>().rechargeTime = rechargeTime;
 			tempSpell.GetComponent<SpellTemplate>().particleEffect = particleEffect;
 			tempSpell.GetComponent<SpellTemplate>().loading = playerAnimLoading;
