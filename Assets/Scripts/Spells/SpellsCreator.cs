@@ -87,6 +87,7 @@ public class SpellsCreator : EditorWindow
         EditorGUI.indentLevel--;
         GUILayout.Space(50);
 
+<<<<<<< HEAD
         if (GUILayout.Button("Save"))
         {
 			SaveSpell();
@@ -99,6 +100,11 @@ public class SpellsCreator : EditorWindow
 		{
 			LoadSpell();
 		}
+=======
+            GameObject newSpell = PrefabUtility.CreatePrefab("Assets/Prefabs/Spells/" + spellName + ".prefab", tempSpell);
+            DestroyImmediate(tempSpell);
+        }
+>>>>>>> defc65e25be9ef5e066c10b51d71606d36d2b7f0
     }
 
 	private void LoadSpell()
