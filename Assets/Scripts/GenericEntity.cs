@@ -44,7 +44,7 @@ public class GenericEntity : MonoBehaviour
 		canAttackTimer.UpdateTimer();
 		//Stacking timers:
 		currentSpeed = UpdateStackingSlowTimer(slowTimer, baseSpeed);
-		stunTimer.UpdateTimer;
+		stunTimer.UpdateTimer();
 		if(stunTimer.timerTime > 0)
 		{
 			currentSpeed = 0;
@@ -55,7 +55,7 @@ public class GenericEntity : MonoBehaviour
 	//Example method for using slow-timers
 	private float UpdateStackingSlowTimer(List<FloatTimer> stackTimer, float speed)
 	{
-		List<FloatTimer> timersToRemove;
+		List<FloatTimer> timersToRemove = new List<FloatTimer>();
 
 		foreach(FloatTimer timer in stackTimer)
 		{
