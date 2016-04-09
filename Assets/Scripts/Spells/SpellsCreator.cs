@@ -213,35 +213,38 @@ public class SpellsCreator : EditorWindow
 	{
 		GameObject tempSpell = new GameObject();
 		tempSpell.AddComponent<SpellTemplate>();
-		tempSpell.GetComponent<SpellTemplate>().spellName = spellName;
-		tempSpell.GetComponent<SpellTemplate>().description = description;
-		tempSpell.GetComponent<SpellTemplate>().icon = icon;
-		tempSpell.GetComponent<SpellTemplate>().type = type;
+
+        SpellTemplate st = tempSpell.GetComponent<SpellTemplate>();
+
+        st.spellName = spellName;
+        st.description = description;
+        st.icon = icon;
+        st.type = type;
 		switch(type)
 		{
 		case 0:
-			tempSpell.GetComponent<SpellTemplate>().damages = damages;
+			st.damages = damages;
 			break;
 		case 1:
-			tempSpell.GetComponent<SpellTemplate>().health = health;
+			st.health = health;
 			break;
 		case 2:
-			tempSpell.GetComponent<SpellTemplate>().prefab = prefab;
+			st.prefab = prefab;
 			break;
 		}
-		tempSpell.GetComponent<SpellTemplate>().zone = zone;
+		st.zone = zone;
 		if(zone)
 		{
-			tempSpell.GetComponent<SpellTemplate>().radius = radius;
-			tempSpell.GetComponent<SpellTemplate>().divideDamages = divideDamages;
+			st.radius = radius;
+			st.divideDamages = divideDamages;
 		}
-		tempSpell.GetComponent<SpellTemplate>().castTime = castTime;
-		tempSpell.GetComponent<SpellTemplate>().rechargeTime = rechargeTime;
-		tempSpell.GetComponent<SpellTemplate>().particleEffect = particleEffect;
-		tempSpell.GetComponent<SpellTemplate>().loading = playerAnimLoading;
-		tempSpell.GetComponent<SpellTemplate>().launching = playerAnimLauching;
+		st.castTime = castTime;
+		st.rechargeTime = rechargeTime;
+		st.particleEffect = particleEffect;
+		st.loading = playerAnimLoading;
+		st.launching = playerAnimLauching;
 
-		GameObject newSpell = PrefabUtility.CreatePrefab("Assets/Prefabs/Spells/" + spellName + ".prefab", tempSpell);
+        GameObject newSpell = PrefabUtility.CreatePrefab("Assets/Prefabs/Spells/" + spellName + ".prefab", tempSpell);
 		//string relPath = AssetDatabase.GetAssetPath(newSpell);
 		spellObject = newSpell;
 		DestroyImmediate(tempSpell);
