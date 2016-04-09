@@ -74,5 +74,4 @@ public class GenericEntity : MonoBehaviour
 
 		return speed;
 	}
-
 }

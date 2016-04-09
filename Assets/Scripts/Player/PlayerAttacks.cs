@@ -18,14 +18,11 @@ public class PlayerAttacks : MonoBehaviour
 
     private GameObject test;
 
-    private Transform arms;
-
     void Start ()
     {
         helper = GetComponent<PlayerHelper>();
 
         inRange = new List<GenericEnemy>();
-        arms = transform.GetChild(0);
     }
 	
 	void Update ()

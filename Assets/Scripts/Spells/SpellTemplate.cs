@@ -4,20 +4,20 @@ using System.Collections;
 
 public class SpellTemplate : MonoBehaviour
 {
-    //[HideInInspector]
     public string spellName, description;
-    //[HideInInspector]
+    
     public int type, damages, health;
-    //[HideInInspector]
+    
     public float rechargeTime, radius, castTime;
-    //[HideInInspector]
+    
     public bool zone, divideDamages;
-    //[HideInInspector]
-    public GameObject particleEffect, prefab;
-    //[HideInInspector]
+    
+    public GameObject particleEffect, prefab; // Prefab is used for invocation
+
     public Sprite icon;
-    //[HideInInspector]
+
     public Animation loading, launching;
+
     [HideInInspector]
     public float startLoadTime;
     [HideInInspector]
