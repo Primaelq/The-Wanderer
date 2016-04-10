@@ -14,7 +14,7 @@ public class EnemiesManager : MonoBehaviour
             enemies.Add(GameObject.FindGameObjectsWithTag("Enemy")[i]);
         }
     }
-	
+
 	void Update ()
     {
 	    
