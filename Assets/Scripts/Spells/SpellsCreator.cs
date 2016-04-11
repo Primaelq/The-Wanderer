@@ -10,13 +10,16 @@ public class SpellsCreator : EditorWindow
 
     string[] types = {"Attack", "Treat", "Invocation"};
 
-    int damages, health, type;
+    int damage, health, type;
 
     bool zone, stopPlayerWhenCasting, divideDamages, divideHealth;
 
     float radius, castTime, rechargeTime;
 
     GameObject prefab, particleEffect;
+
+	Vector3[] prefabLocArray;
+	int arrayLength;
 
     Animation playerAnimLoading, playerAnimLauching;
 
@@ -42,17 +45,28 @@ public class SpellsCreator : EditorWindow
         
         type = EditorGUILayout.Popup("Type", type, types);
 
+		if(prefabLocArray == null)
+			prefabLocArray = new Vector3[1];
         EditorGUI.indentLevel++;
         switch (type)
         {
             case 0:
-                damages = EditorGUILayout.IntField("Damages", damages);
+                damage = EditorGUILayout.IntField("Damage", damage);
                 break;
             case 1:
                 health = EditorGUILayout.IntField("Health", health);
                 break;
             case 2:
                 prefab = (GameObject)EditorGUILayout.ObjectField("Prefab", prefab, typeof(GameObject), false);
+				arrayLength = prefabLocArray.Length;
+				arrayLength = EditorGUILayout.IntField("Amount of prefabs and their positions", arrayLength);
+			for(int i = 0; i < prefabLocArray.Length; i++)
+				{
+				Debug.Log(i);
+				prefabLocArray[i] = EditorGUILayout.Vector3Field("Position of number "+i, prefabLocArray[i]);
+				}
+				if(arrayLength != prefabLocArray.Length)
+					prefabLocArray = UpdatePrefabPosArray(prefabLocArray,arrayLength);
                 break;
         }
         EditorGUI.indentLevel--;
@@ -117,14 +131,22 @@ public class SpellsCreator : EditorWindow
 				description = spellt.description;
 				icon = spellt.icon;
 				type = spellt.type;
-				damages = spellt.damages;
+				damage = spellt.damage;
 				health = spellt.health;
 				zone = spellt.zone;
 				divideDamages = spellt.divideDamages;
 				radius = spellt.radius;
 				castTime = spellt.castTime;
 				rechargeTime = spellt.rechargeTime;
-				prefab = spellt.prefab;
+				prefab = spellt.invocationPrefab;
+				if(spellt.prefabLocArray == null)
+				{
+					spellt.prefabLocArray = new Vector3[1];
+				}
+
+				prefabLocArray = spellt.prefabLocArray;
+				arrayLength = spellt.prefabLocArray.Length;
+
 				particleEffect = spellt.particleEffect;
 				playerAnimLoading = spellt.loading;
 				playerAnimLauching = spellt.launching;
@@ -145,7 +167,7 @@ public class SpellsCreator : EditorWindow
 		description = "";
 		icon = null;
 		type = 0;
-		damages = 0;
+		damage = 0;
 		health = 0;
 		zone = false;
 		divideHealth = false;
@@ -183,13 +205,14 @@ public class SpellsCreator : EditorWindow
 			switch(type)
 			{
 			case 0:
-				tempSpell.GetComponent<SpellTemplate>().damages = damages;
+				tempSpell.GetComponent<SpellTemplate>().damage = damage;
 				break;
 			case 1:
 				tempSpell.GetComponent<SpellTemplate>().health = health;
 				break;
 			case 2:
-				tempSpell.GetComponent<SpellTemplate>().prefab = prefab;
+				tempSpell.GetComponent<SpellTemplate>().invocationPrefab = prefab;
+				tempSpell.GetComponent<SpellTemplate>().prefabLocArray = prefabLocArray;
 				break;
 			}
 			tempSpell.GetComponent<SpellTemplate>().zone = zone;
@@ -220,13 +243,14 @@ public class SpellsCreator : EditorWindow
 		switch(type)
 		{
 		case 0:
-			st.damages = damages;
+			st.damage = damage;
 			break;
 		case 1:
 			st.health = health;
 			break;
 		case 2:
-			st.prefab = prefab;
+			st.invocationPrefab = prefab;
+			st.prefabLocArray = prefabLocArray;
 			break;
 		}
 		st.zone = zone;
@@ -245,5 +269,27 @@ public class SpellsCreator : EditorWindow
 		//string relPath = AssetDatabase.GetAssetPath(newSpell);
 		spellObject = newSpell;
 		DestroyImmediate(tempSpell);
+	}
+
+	private Vector3[] UpdatePrefabPosArray(Vector3[] preArray, int length)
+	{
+		if(length <= 0)
+		{
+						return new Vector3[0];
+		}
+		Vector3[] newArray = new Vector3[length];
+
+		for(int i = 0; i < length; i++)
+		{
+			if(i < preArray.Length)//There is some variable in preArray[i]
+			{
+				newArray[i] = preArray[i];
+			}
+			else
+			{
+				newArray[i] = Vector3.zero;
+			}
+		}
+		return newArray;
 	}
 }

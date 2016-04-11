@@ -6,13 +6,15 @@ public class SpellTemplate : MonoBehaviour
 {
     public string spellName, description;
     
-    public int type, damages, health;
+    public int type, damage, health;
     
     public float rechargeTime, radius, castTime;
     
     public bool zone, divideDamages;
     
-    public GameObject particleEffect, prefab; // Prefab is used for invocation
+    public GameObject particleEffect, invocationPrefab; // Prefab is used for invocation
+
+	public Vector3[] prefabLocArray; //amount And Position Of Invocation Prefabs In Relation To Player
 
     public Sprite icon;
 
