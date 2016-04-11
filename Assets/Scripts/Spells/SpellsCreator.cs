@@ -42,7 +42,7 @@ public class SpellsCreator : EditorWindow
         EditorGUILayout.Separator();
         icon = (Sprite)EditorGUILayout.ObjectField("Icon", icon, typeof(Sprite), false);
         EditorGUILayout.Separator();
-        
+
         type = EditorGUILayout.Popup("Type", type, types);
 
 		if(prefabLocArray == null)
