@@ -5,11 +5,13 @@ using System.Collections.Generic;
 
 public class PlayerGUI : MonoBehaviour
 {
+
     private PlayerHelper helper;
 
     private int selected = 0;
 
     private float startTime;
+
 
     void Start ()
     {
@@ -43,8 +45,8 @@ public class PlayerGUI : MonoBehaviour
         }
         else if(helper.currentStamina < helper.startStamina)
         {
-            helper.currentStamina += Time.deltaTime;
-            helper.staminaReady = false;
+			helper.currentStamina += Time.deltaTime / helper.staminaRechargeRate;
+			helper.staminaReady = false;
         }
         else
         {

@@ -13,6 +13,8 @@ public class PlayerHelper : MonoBehaviour
 
     public GameObject spellBar;
 
+	public float staminaRechargeRate;
+
     public Collider frontWeapon, aroundWeapon;
     
     public Slider healthSlider, staminaSlider;
