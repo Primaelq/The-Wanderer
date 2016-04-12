@@ -24,7 +24,7 @@ public class GenericEnemy : MonoBehaviour
     void Start ()
     {
         indicator.SetActive(false);
-        healthBar.transform.position = new Vector3(background.transform.position.x, background.transform.position.y, background.transform.position.z - 0.0001f);
+        healthBar.transform.position = new Vector3(background.transform.position.x, background.transform.position.y, background.transform.position.z - 0.003f);
 
         agent = GetComponent<NavMeshAgent>();
         startSpeed = agent.speed;
@@ -83,7 +83,7 @@ public class GenericEnemy : MonoBehaviour
         healthBar.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
         background.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
 
-        healthBar.transform.position = new Vector3(background.transform.position.x - ((1 - healthBar.transform.localScale.x) / 2), background.transform.position.y, background.transform.position.z - 0.0001f);
+        healthBar.transform.position = new Vector3(background.transform.position.x - ((1 - healthBar.transform.localScale.x) / 2), background.transform.position.y, background.transform.position.z - 0.003f);
     }
 
     IEnumerator Delay(float waitTime)
