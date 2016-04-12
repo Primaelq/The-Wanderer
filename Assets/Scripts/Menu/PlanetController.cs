@@ -7,7 +7,8 @@ public class PlanetController : MonoBehaviour
 
     private Vector2 movement;
 
-    private bool idle = true;
+    [HideInInspector]
+    public bool idle = true;
 
 	void Start ()
     {
@@ -17,7 +18,7 @@ public class PlanetController : MonoBehaviour
 	void Update ()
     {
         movement.x = Input.GetAxis("Vertical") * sensitivity;
-        movement.y = Input.GetAxis("Horizontal") * sensitivity;
+        movement.y = -Input.GetAxis("Horizontal") * sensitivity;
 
         transform.Rotate(movement);
         
