@@ -35,7 +35,7 @@ public class PlayerGUI : MonoBehaviour
         {
             helper.spells[selected].GetComponent<SpellTemplate>().loaded = true;
             helper.spells[selected].GetComponent<SpellTemplate>().startLoadTime = Time.time;
-            helper.spells[selected].GetChild(0).GetComponent<Slider>().value = 0.0f;
+            helper.spells[selected].transform.GetChild(0).GetComponent<Slider>().value = 0.0f;
         }
 
         if(helper.loadingStamina)
@@ -54,7 +54,7 @@ public class PlayerGUI : MonoBehaviour
         }
     }
 
-    public void DisableExcept(int index, List<Transform> list)
+    public void DisableExcept(int index, List<GameObject> list)
     {
         for (int i = 0; i < list.Count; i++)
         {
