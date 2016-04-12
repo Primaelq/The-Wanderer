@@ -30,8 +30,13 @@ public class PanelsManager : MonoBehaviour
 
     public void SwitchPanel(int index)
     {
-        if(index != currentPanel)
+        panels[currentPanel].GetComponent<RectTransform>().anchoredPosition = planetStartPos;
+        panels[index].GetComponent<RectTransform>().anchoredPosition = new Vector3(offset, 0.0f, 0.0f);
+
+        if (index != currentPanel)
         {
+            planet.GetComponent<PlanetController>().idle = true;
+
             StartCoroutine(Slide(currentPanel, new Vector3(offset, 0.0f, 0.0f), 1.5f));
 
             if (currentPanel == 0)
