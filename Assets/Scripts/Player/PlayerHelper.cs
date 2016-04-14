@@ -20,6 +20,8 @@ public class PlayerHelper : MonoBehaviour
     public Slider healthSlider, staminaSlider;
 
     public Color opaque, translucent;
+    
+    public List<GameObject> spells;
 
     [Range(0.0f, 1.0f)]
     public float startStamina = 0.5f;
@@ -36,19 +38,11 @@ public class PlayerHelper : MonoBehaviour
     [HideInInspector]
     public Vector3 targetPoint;
 
-    [HideInInspector]
-    public List<Transform> spells;
-
     void Start()
     {
         currentHealth = startHealth;
 
-        spells = new List<Transform>();
-
-        for (int i = 0; i < spellBar.transform.childCount; i++)
-        {
-            spells.Add(spellBar.transform.GetChild(i));
-        }
+        spells = new List<GameObject>();
 
         currentHealth = startHealth;
         healthSlider.maxValue = startHealth;

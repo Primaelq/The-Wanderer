@@ -4,15 +4,23 @@ using System.Collections;
 
 public class SpellsManager : MonoBehaviour
 {
-    public GameObject spell;
+    public int index;
+
+    private PlayerHelper helper;
+
+    private GameObject spell;
 
     private Slider slider;
     private SpellTemplate ST;
 
 	void Start ()
     {
-        if(spell != null)
+        helper = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHelper>();
+
+        if(helper.spells[index] != null)
         {
+            spell = helper.spells[index];
+
             ST = spell.GetComponent<SpellTemplate>();
             transform.GetComponent<Image>().sprite = ST.icon;
             slider = transform.GetChild(0).GetComponent<Slider>();
